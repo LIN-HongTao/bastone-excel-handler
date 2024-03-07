@@ -23,7 +23,7 @@ def handle_sheet(workbook: Workbook, sheet_name: str) -> dict[str, Sequence[str 
     worksheet = workbook[sheet_name]
     data: dict[str, Sequence[str | int]] = {}
     headers = [cell.value.replace(" ", "") if type(cell.value) is str else cell.value for cell in worksheet[1]]
-    if sheet_name == "bybit":
+    if sheet_name == "bybit" or sheet_name == "gate":
         new_headers = [
             "日期",
             "单位净值",
@@ -63,7 +63,7 @@ def handle_sheet(workbook: Workbook, sheet_name: str) -> dict[str, Sequence[str 
 
         return data
 
-    worksheet.delete_rows(worksheet.max_row - 6, 7)
+    worksheet.delete_rows(worksheet.max_row - 136, 137)
 
     datetime_column = "datetime"
     col_index = headers.index(datetime_column) + 1
